@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
+import ListApplicantComponent from './components/ListApplicantComponent';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Hello React</h1>
-      </header>
+    <div className="container">
+      <ListApplicantComponent />
     </div>
   );
 }
