@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ApplicantService from '../services/ApplicantService';
 
 class ListApplicantComponent extends Component {
     constructor(props) {
@@ -9,6 +10,11 @@ class ListApplicantComponent extends Component {
         }
     }
 
+    componentDidMount() {
+        ApplicantService.getApplicants().then((res) => {
+            this.setState({ applicants: res.data });
+        });
+    }
     render() {
         return (
             <div>
@@ -39,7 +45,7 @@ class ListApplicantComponent extends Component {
                                             <td>{applicant.surname}</td>
                                             <td>{applicant.description}</td>
                                             <td>{applicant.birth}</td>
-                                            <td>{applicant.status}</td>
+                                            <td>{applicant.status.getStatusCode}</td>
                                             <td>{applicant.status}</td>
                                         </tr>
                                 )
@@ -47,8 +53,6 @@ class ListApplicantComponent extends Component {
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
         );
     }
