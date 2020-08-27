@@ -11,6 +11,7 @@ class ListApplicantComponent extends Component {
 
         this.addApplicant = this.addApplicant.bind(this);
         this.editApplicant = this.editApplicant.bind(this);
+        this.deleteApplicant = this.deleteApplicant.bind(this);
     }
 
     componentDidMount() {
@@ -21,6 +22,16 @@ class ListApplicantComponent extends Component {
 
     editApplicant(id) {
         this.props.history.push(`/add-applicant/${id}`);
+    }
+
+    deleteApplicant(id) {
+        ApplicantService.deleteApplicant(id).then(res => {
+            this.setState({ applicants: this.state.applicants.filter(applicant => applicant.id !== id) });
+        });
+    }
+
+    viewApplicant(id) {
+        this.props.history.push(`/view-applicant/${id}`);
     }
 
     addApplicant() {
@@ -63,7 +74,9 @@ class ListApplicantComponent extends Component {
                                             <td>{applicant.status.getStatusCode}</td>
                                             <td>{applicant.status}</td>
                                             <td>
-                                                <button onClick={() => this.editApplicant(applicant.id)} className="btn btn-info"> Güncelle </button>
+                                                <button onClick={() => this.editApplicant(applicant.id)} className="btn btn-success"> Güncelle </button>
+                                                <button style={{ marginLeft: "10px" }} onClick={() => this.deleteApplicant(applicant.id)} className="btn btn-danger"> Sil </button>
+                                                <button style={{ marginLeft: "10px" }} onClick={() => this.viewApplicant(applicant.id)} className="btn btn-info"> Detay </button>
                                             </td>
                                         </tr>
                                 )

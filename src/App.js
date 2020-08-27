@@ -5,7 +5,8 @@ import ListApplicantComponent from './components/ListApplicantComponent';
 import CreateApplicantComponent from './components/CreateApplicantComponent';
 import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
-import UpdateApplicantComponent from './components/UpdateApplicantComponent';
+import ViewApplicantComponent from './components/ViewApplicantComponent';
+// import UpdateApplicantComponent from './components/UpdateApplicantComponent';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/applicants" component={ListApplicantComponent}></Route>
             <Route path="/add-applicant/:id" component={CreateApplicantComponent}></Route>
             {/* <Route path="/update-applicant/:id" component={UpdateApplicantComponent}></Route> */}
+            <Route path="/view-applicant/:id" component={ViewApplicantComponent}></Route>
           </Switch>
         </div>
         <FooterComponent />

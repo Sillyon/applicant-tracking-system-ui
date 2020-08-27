@@ -19,6 +19,10 @@ class ApplicantService {
     updateApplicant(applicant, applicantId) {
         return axios.put(`${EMPLOYEE_API_BASE_URL}/${applicantId}`, applicant)
     }
+
+    deleteApplicant(applicantId) {
+        return axios.delete(`${EMPLOYEE_API_BASE_URL}/${applicantId}`);
+    }
 }
 
 export default new ApplicantService();
