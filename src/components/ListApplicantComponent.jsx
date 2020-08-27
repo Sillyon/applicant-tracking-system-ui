@@ -21,7 +21,7 @@ class ListApplicantComponent extends Component {
     }
 
     editApplicant(id) {
-        this.props.history.push(`/add-applicant/${id}`);
+        this.props.history.push(`/save-applicant/${id}`);
     }
 
     deleteApplicant(id) {
@@ -35,16 +35,16 @@ class ListApplicantComponent extends Component {
     }
 
     addApplicant() {
-        this.props.history.push(`/add-applicant/_add`);
+        this.props.history.push(`/save-applicant/_add`);
     }
 
     render() {
         return (
             <div>
                 <div className="row">
-                    <button className="btn btn-primary" onClick={this.addApplicant}> Yeni Kişi Ekle </button>
+                    <button style={{ marginTop: "10px" }} className="btn btn-success" onClick={this.addApplicant}> Yeni Kişi Ekle </button>
                 </div>
-                <h2 className="text-center">Applicants List</h2>
+                <h2 className="text-center"> Adayların Listesi </h2>
                 <div className="row">
                     <table className="table table-striped table-bordered">
 

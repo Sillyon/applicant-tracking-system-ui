@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ApplicantService from '../services/ApplicantService';
 
-class CreateApplicantComponent extends Component {
+class CreateOrUpdateApplicantComponent extends Component {
     constructor(props) {
         super(props)
 
@@ -67,7 +67,7 @@ class CreateApplicantComponent extends Component {
             });
         } else {
             ApplicantService.updateApplicant(applicant, this.state.id).then(res => {
-                this.props.history.push('applicants');
+                this.props.history.push('/applicants');
             });
         }
     }
@@ -86,8 +86,8 @@ class CreateApplicantComponent extends Component {
 
     render() {
         return (
-            <div>
-                <div className="container">
+            <div >
+                <div style={{ marginTop: "10px" }} className="container">
                     <div className="row">
                         <div className="card col-md-6 offset-md-3 offset-md-3">
                             {
@@ -97,20 +97,20 @@ class CreateApplicantComponent extends Component {
                                 <form>
                                     <div className="form-group">
                                         <label> Ad: </label>
-                                        <input placeholder="Name" name="name" className="form-control"
+                                        <input placeholder="name" name="name" className="form-control"
                                             value={this.state.name} onChange={this.changeNameHandler} />
                                     </div>
                                     <div className="form-group">
                                         <label> Soyad: </label>
-                                        <input placeholder="Surname" name="surname" className="form-control"
+                                        <input placeholder="surname" name="surname" className="form-control"
                                             value={this.state.surname} onChange={this.changeSurnameHandler} />
                                     </div>
                                     <div className="form-group">
                                         <label> Not: </label>
-                                        <input placeholder="Description" name="description" className="form-control"
+                                        <input placeholder="description" name="description" className="form-control"
                                             value={this.state.description} onChange={this.changeDescriptionHandler} />
                                     </div>
-                                    <button className="btn btn-success" onClick={this.saveOrUpdateApplicant}> Kaydet </button>
+                                    <button className="btn btn-primary" onClick={this.saveOrUpdateApplicant}> Kaydet </button>
                                     <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{ marginLeft: "10px" }}> İptal Et </button>
                                 </form>
                             </div>
@@ -122,4 +122,4 @@ class CreateApplicantComponent extends Component {
     }
 }
 
-export default CreateApplicantComponent;
+export default CreateOrUpdateApplicantComponent;

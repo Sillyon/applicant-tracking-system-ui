@@ -58,7 +58,7 @@ class UpdateApplicantComponent extends Component {
         console.log('applicant => ' + JSON.stringify(applicant));
 
         ApplicantService.updateApplicant(applicant, this.state.id).then(res => {
-            this.props.history.push('applicants');
+            this.props.history.push('/applicants');
         });
     }
 
@@ -69,7 +69,7 @@ class UpdateApplicantComponent extends Component {
     render() {
         return (
             <div>
-                <div className="container">
+                <div style={{ marginTop: "10px" }} className="container">
                     <div className="row">
                         <div className="card col-md-6 offset-md-3 offset-md-3">
                             <h3 className="text-center"> Aday Güncelleme </h3>
@@ -77,20 +77,20 @@ class UpdateApplicantComponent extends Component {
                                 <form>
                                     <div className="form-group">
                                         <label> Ad: </label>
-                                        <input placeholder="Name" name="name" className="form-control"
+                                        <input placeholder="name" name="name" className="form-control"
                                             value={this.state.name} onChange={this.changeNameHandler} />
                                     </div>
                                     <div className="form-group">
                                         <label> Soyad: </label>
-                                        <input placeholder="Surname" name="surname" className="form-control"
+                                        <input placeholder="surname" name="surname" className="form-control"
                                             value={this.state.surname} onChange={this.changeSurnameHandler} />
                                     </div>
                                     <div className="form-group">
                                         <label> Not: </label>
-                                        <input placeholder="Description" name="description" className="form-control"
+                                        <input placeholder="description" name="description" className="form-control"
                                             value={this.state.description} onChange={this.changeDescriptionHandler} />
                                     </div>
-                                    <button className="btn btn-success" onClick={this.updateApplicant}> Kaydet </button>
+                                    <button className="btn btn-primary" onClick={this.updateApplicant}> Kaydet </button>
                                     <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{ marginLeft: "10px" }}> İptal Et </button>
                                 </form>
                             </div>

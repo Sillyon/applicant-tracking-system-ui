@@ -1,27 +1,31 @@
 import axios from 'axios';
 
-const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/applicants";
+const APPLICANT_API_BASE_URL = "http://localhost:8080/api/applicants";
 
 class ApplicantService {
 
     getApplicants() {
-        return axios.get(EMPLOYEE_API_BASE_URL);
+        return axios.get(APPLICANT_API_BASE_URL);
     }
 
     createApplicant(applicant) {
-        return axios.post(EMPLOYEE_API_BASE_URL, applicant);
+        return axios.post(APPLICANT_API_BASE_URL, applicant);
     }
 
     getApplicantById(applicantId) {
-        return axios.get(EMPLOYEE_API_BASE_URL + '/' + applicantId);
+        return axios.get(APPLICANT_API_BASE_URL + '/id=' + applicantId);
+    }
+
+    getApplicantByName(applicantName) {
+        return axios.get(APPLICANT_API_BASE_URL + '/name=' + applicantName);
     }
 
     updateApplicant(applicant, applicantId) {
-        return axios.put(`${EMPLOYEE_API_BASE_URL}/${applicantId}`, applicant)
+        return axios.put(`${APPLICANT_API_BASE_URL}/id=${applicantId}`, applicant)
     }
 
     deleteApplicant(applicantId) {
-        return axios.delete(`${EMPLOYEE_API_BASE_URL}/${applicantId}`);
+        return axios.delete(`${APPLICANT_API_BASE_URL}/id=${applicantId}`);
     }
 }
 
