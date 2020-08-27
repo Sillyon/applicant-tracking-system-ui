@@ -53,10 +53,9 @@ class ListApplicantComponent extends Component {
                                 <th>Aday Id</th>
                                 <th>Ad</th>
                                 <th>Soyad</th>
-                                <th>Not</th>
                                 <th>Doğum Tarihi</th>
                                 <th>Durum</th>
-                                <th>Durum Tanımı</th>
+                                <th>Not</th>
                                 <th>İşlemler</th>
                             </tr>
                         </thead>
@@ -69,10 +68,9 @@ class ListApplicantComponent extends Component {
                                             <td>{applicant.id}</td>
                                             <td>{applicant.name}</td>
                                             <td>{applicant.surname}</td>
-                                            <td>{applicant.description}</td>
                                             <td>{applicant.birth}</td>
-                                            <td>{applicant.status.getStatusCode}</td>
                                             <td>{applicant.status}</td>
+                                            <td>{applicant.description}</td>
                                             <td>
                                                 <button onClick={() => this.editApplicant(applicant.id)} className="btn btn-success"> Güncelle </button>
                                                 <button style={{ marginLeft: "10px" }} onClick={() => this.deleteApplicant(applicant.id)} className="btn btn-danger"> Sil </button>

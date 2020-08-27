@@ -6,7 +6,6 @@ import CreateOrUpdateApplicantComponent from './components/CreateOrUpdateApplica
 import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
 import ViewApplicantComponent from './components/ViewApplicantComponent';
-// import UpdateApplicantComponent from './components/UpdateApplicantComponent';
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
             <Route path="/" exact component={ListApplicantComponent}></Route>
             <Route path="/applicants" component={ListApplicantComponent}></Route>
             <Route path="/save-applicant/:id" component={CreateOrUpdateApplicantComponent}></Route>
-            {/* <Route path="/update-applicant/:id" component={UpdateApplicantComponent}></Route> */}
             <Route path="/view-applicant/:id" component={ViewApplicantComponent}></Route>
           </Switch>
         </div>

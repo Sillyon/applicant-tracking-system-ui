@@ -35,6 +35,14 @@ class ViewApplicantComponent extends Component {
                             <div> {this.state.applicant.surname} </div>
                         </div>
                         <div className="row">
+                            <label> Doğum Tarihi: </label>
+                            <div> {this.state.applicant.birth} </div>
+                        </div>
+                        <div className="row">
+                            <label> Durum: </label>
+                            <div> {this.state.applicant.status} </div>
+                        </div>
+                        <div className="row">
                             <label> Açıklama: </label>
                             <div> {this.state.applicant.description} </div>
                         </div>

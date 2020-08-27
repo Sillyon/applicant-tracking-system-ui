@@ -9,14 +9,15 @@ class CreateOrUpdateApplicantComponent extends Component {
             id: this.props.match.params.id,
             name: '',
             surname: '',
-            description: '',
-            birth: '1993-09-25',
-            status: 0
-            // TODO düzenlenecek.
+            birth: '',
+            status: '',
+            description: ''
         }
 
         this.changeNameHandler = this.changeNameHandler.bind(this);
         this.changeSurnameHandler = this.changeSurnameHandler.bind(this);
+        this.changeBirthHandler = this.changeBirthHandler.bind(this);
+        this.changeStatusHandler = this.changeStatusHandler.bind(this);
         this.changeDescriptionHandler = this.changeDescriptionHandler.bind(this);
         this.saveOrUpdateApplicant = this.saveOrUpdateApplicant.bind(this);
     }
@@ -31,8 +32,9 @@ class CreateOrUpdateApplicantComponent extends Component {
                 this.setState({
                     name: applicant.name,
                     surname: applicant.surname,
+                    birth: applicant.birth,
+                    status: applicant.status,
                     description: applicant.description
-                    //buraya eklemeler yapılacak.
                 });
             });
         }
@@ -46,6 +48,14 @@ class CreateOrUpdateApplicantComponent extends Component {
         this.setState({ surname: event.target.value });
     }
 
+    changeBirthHandler(event) {
+        this.setState({ birth: event.target.value });
+    }
+
+    changeStatusHandler(event) {
+        this.setState({ status: event.target.value });
+    }
+
     changeDescriptionHandler(event) {
         this.setState({ description: event.target.value });
     }
@@ -55,9 +65,9 @@ class CreateOrUpdateApplicantComponent extends Component {
         let applicant = {
             name: this.state.name,
             surname: this.state.surname,
-            description: this.state.description,
             birth: this.state.birth,
-            status: this.state.status
+            status: this.state.status,
+            description: this.state.description
         };
         console.log('applicant => ' + JSON.stringify(applicant));
 
@@ -104,6 +114,16 @@ class CreateOrUpdateApplicantComponent extends Component {
                                         <label> Soyad: </label>
                                         <input placeholder="surname" name="surname" className="form-control"
                                             value={this.state.surname} onChange={this.changeSurnameHandler} />
+                                    </div>
+                                    <div className="form-group">
+                                        <label> Doğum Tarihi: </label>
+                                        <input placeholder="birth" name="birth" className="form-control"
+                                            value={this.state.birth} onChange={this.changeBirthHandler} />
+                                    </div>
+                                    <div className="form-group">
+                                        <label> Durum: </label>
+                                        <input placeholder="status" name="status" className="form-control"
+                                            value={this.state.status} onChange={this.changeStatusHandler} />
                                     </div>
                                     <div className="form-group">
                                         <label> Not: </label>
