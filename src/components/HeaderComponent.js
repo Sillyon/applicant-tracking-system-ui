@@ -7,7 +7,7 @@ class HeaderComponent extends Component {
                 <header>
                     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                         <div>
-                            <a href="https://github.com/Sillyon?tab=repositories" className="navbar-brand">Applicant Tracking System</a>
+                            <a href="http://localhost:3000/" className="navbar-brand">Applicant Tracking System</a>
                         </div>
                     </nav>
                 </header>

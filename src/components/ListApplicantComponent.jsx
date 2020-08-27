@@ -20,18 +20,18 @@ class ListApplicantComponent extends Component {
     }
 
     editApplicant(id) {
-        this.props.history.push(`/update-applicant/${id}`);
+        this.props.history.push(`/add-applicant/${id}`);
     }
 
     addApplicant() {
-        this.props.history.push(`/add-applicant`);
+        this.props.history.push(`/add-applicant/_add`);
     }
 
     render() {
         return (
             <div>
                 <div className="row">
-                    <button className="btn btn-primary" onClick={this.addApplicant}>Add Applicant</button>
+                    <button className="btn btn-primary" onClick={this.addApplicant}> Yeni Kişi Ekle </button>
                 </div>
                 <h2 className="text-center">Applicants List</h2>
                 <div className="row">
