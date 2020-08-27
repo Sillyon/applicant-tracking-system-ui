@@ -8,6 +8,9 @@ class ListApplicantComponent extends Component {
         this.state = {
             applicants: []
         }
+
+        this.addApplicant = this.addApplicant.bind(this);
+        this.editApplicant = this.editApplicant.bind(this);
     }
 
     componentDidMount() {
@@ -15,9 +18,21 @@ class ListApplicantComponent extends Component {
             this.setState({ applicants: res.data });
         });
     }
+
+    editApplicant(id) {
+        this.props.history.push(`/update-applicant/${id}`);
+    }
+
+    addApplicant() {
+        this.props.history.push(`/add-applicant`);
+    }
+
     render() {
         return (
             <div>
+                <div className="row">
+                    <button className="btn btn-primary" onClick={this.addApplicant}>Add Applicant</button>
+                </div>
                 <h2 className="text-center">Applicants List</h2>
                 <div className="row">
                     <table className="table table-striped table-bordered">
@@ -47,6 +62,9 @@ class ListApplicantComponent extends Component {
                                             <td>{applicant.birth}</td>
                                             <td>{applicant.status.getStatusCode}</td>
                                             <td>{applicant.status}</td>
+                                            <td>
+                                                <button onClick={() => this.editApplicant(applicant.id)} className="btn btn-info"> Güncelle </button>
+                                            </td>
                                         </tr>
                                 )
                             }
