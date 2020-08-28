@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
 import ApplicantService from '../services/ApplicantService';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
+
+const statusSelect = {
+    0: "Görüşüldü",
+    1: "Beklemede",
+    2: "İptal"
+};
 
 class CreateOrUpdateApplicantComponent extends Component {
     constructor(props) {
@@ -9,7 +18,7 @@ class CreateOrUpdateApplicantComponent extends Component {
             id: this.props.match.params.id,
             name: '',
             surname: '',
-            birth: '',
+            birth: new Date(),
             status: '',
             description: ''
         }
@@ -49,7 +58,7 @@ class CreateOrUpdateApplicantComponent extends Component {
     }
 
     changeBirthHandler(event) {
-        this.setState({ birth: event.target.value });
+        this.setState({ birth: event });
     }
 
     changeStatusHandler(event) {
@@ -65,7 +74,7 @@ class CreateOrUpdateApplicantComponent extends Component {
         let applicant = {
             name: this.state.name,
             surname: this.state.surname,
-            birth: this.state.birth,
+            birth: moment(this.state.birth).format("YYYY-MM-DD"),
             status: this.state.status,
             description: this.state.description
         };
@@ -107,27 +116,35 @@ class CreateOrUpdateApplicantComponent extends Component {
                                 <form>
                                     <div className="form-group">
                                         <label> Ad: </label>
-                                        <input placeholder="name" name="name" className="form-control"
+                                        <input required={true} placeholder="name" name="name" className="form-control"
                                             value={this.state.name} onChange={this.changeNameHandler} />
                                     </div>
                                     <div className="form-group">
                                         <label> Soyad: </label>
-                                        <input placeholder="surname" name="surname" className="form-control"
+                                        <input required={true} placeholder="surname" name="surname" className="form-control"
                                             value={this.state.surname} onChange={this.changeSurnameHandler} />
                                     </div>
                                     <div className="form-group">
                                         <label> Doğum Tarihi: </label>
-                                        <input placeholder="birth" name="birth" className="form-control"
-                                            value={this.state.birth} onChange={this.changeBirthHandler} />
+                                        <div className="form-group">
+                                            <DatePicker dateFormat="yyyy-MM-dd"
+                                                selected={this.state.birth} onChange={this.changeBirthHandler} />
+                                        </div>
                                     </div>
                                     <div className="form-group">
                                         <label> Durum: </label>
-                                        <input placeholder="status" name="status" className="form-control"
-                                            value={this.state.status} onChange={this.changeStatusHandler} />
+                                        <select required={true} placeholder="status" name="status" className="form-control"
+                                            value={this.state.status} onChange={this.changeStatusHandler}>
+                                            {Object.keys(statusSelect).map(key => (
+                                                <option key={key} value={key}>
+                                                    {statusSelect[key]}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
                                     <div className="form-group">
                                         <label> Not: </label>
-                                        <input placeholder="description" name="description" className="form-control"
+                                        <input required={true} placeholder="description" name="description" className="form-control"
                                             value={this.state.description} onChange={this.changeDescriptionHandler} />
                                     </div>
                                     <button className="btn btn-primary" onClick={this.saveOrUpdateApplicant}> Kaydet </button>
