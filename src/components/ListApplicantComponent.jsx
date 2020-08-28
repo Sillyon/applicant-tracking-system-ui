@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import ApplicantService from '../services/ApplicantService';
 
+const statusSelect = {
+    0: "Görüşüldü",
+    1: "Beklemede",
+    2: "İptal",
+    3: "Default"
+};
+
 class ListApplicantComponent extends Component {
     constructor(props) {
         super(props)
@@ -12,6 +19,11 @@ class ListApplicantComponent extends Component {
         this.addApplicant = this.addApplicant.bind(this);
         this.editApplicant = this.editApplicant.bind(this);
         this.deleteApplicant = this.deleteApplicant.bind(this);
+
+        this.filterIdHandler = this.filterIdHandler.bind(this);
+        this.filterNameHandler = this.filterNameHandler.bind(this);
+        this.filterSurnameHandler = this.filterSurnameHandler.bind(this);
+        this.filterStatusHandler = this.filterStatusHandler.bind(this);
     }
 
     componentDidMount() {
@@ -38,16 +50,96 @@ class ListApplicantComponent extends Component {
         this.props.history.push(`/save-applicant/_add`);
     }
 
+    filterIdHandler(event) {
+        if (parseInt(event.target.value) !== 0) {
+            this.setState({ applicants: this.state.applicants.filter(applicant => applicant.id === parseInt(event.target.value)) });
+        } else {
+            this.componentDidMount();
+        }
+    }
+
+    filterNameHandler(event) {
+        if (event.target.value !== '') {
+            this.setState({ applicants: this.state.applicants.filter(applicant => applicant.name === event.target.value) });
+        } else {
+            this.componentDidMount();
+        }
+    }
+
+    filterSurnameHandler(event) {
+        if (event.target.value !== 0) {
+            this.setState({ applicants: this.state.applicants.filter(applicant => applicant.surname === event.target.value) });
+        } else {
+            this.componentDidMount();
+        }
+    }
+
+    filterStatusHandler(event) {
+        if (parseInt(event.target.value) === 0) {
+            this.setState({ applicants: this.state.applicants.filter(applicant => applicant.status === statusSelect[0]) });
+        } else if (parseInt(event.target.value) === 1) {
+            this.setState({ applicants: this.state.applicants.filter(applicant => applicant.status === statusSelect[1]) });
+        } else if (parseInt(event.target.value) === 2) {
+            this.setState({ applicants: this.state.applicants.filter(applicant => applicant.status === statusSelect[2]) });
+        } else {
+            this.componentDidMount();
+        }
+    }
+
     render() {
         return (
             <div>
-                <div className="row">
-                    <button style={{ marginTop: "10px" }} className="btn btn-success" onClick={this.addApplicant}> Yeni Kişi Ekle </button>
+                <div style={{ marginTop: "5px" }} className="row" >
+                    <table className="table table-striped table-bordered col-md-6 md-3">
+                        <thead>
+                            <tr>
+                                <th>Seçim Parametreleri</th>
+                                <th>Filtreleme</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Aday Id:</td>
+                                <td>
+                                    <input type="number" placeholder="id" name="id" className="form-control"
+                                        value={this.state.id} onChange={this.filterIdHandler} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ad:</td>
+                                <td>
+                                    <input placeholder="name" name="name" className="form-control"
+                                        value={this.state.name} onChange={this.filterNameHandler} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Soyad:</td>
+                                <td>
+                                    <input placeholder="surname" name="surname" className="form-control"
+                                        value={this.state.surname} onChange={this.filterSurnameHandler} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Görüşme Durumu:</td>
+                                <td>
+                                    <select placeholder="status" name="status" className="form-control"
+                                        defaultValue="3" value={this.state.status} onChange={this.filterStatusHandler}>
+                                        {Object.keys(statusSelect).map(key => (
+                                            <option key={key} value={key}>
+                                                {statusSelect[key]}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <h2 className="text-center"> Adayların Listesi </h2>
-                <div className="row">
+                <div style={{ marginTop: "25px" }} className="row">
+                    <button className="btn btn-success" onClick={this.addApplicant}> Yeni Aday </button>
+                </div>
+                <div style={{ marginTop: "5px" }} className="row">
                     <table className="table table-striped table-bordered">
-
                         <thead>
                             <tr>
                                 <th>Aday Id</th>
@@ -59,7 +151,6 @@ class ListApplicantComponent extends Component {
                                 <th>İşlemler</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             {
                                 this.state.applicants.map(

@@ -103,10 +103,23 @@ class CreateOrUpdateApplicantComponent extends Component {
         }
     }
 
+    getDate() {
+        if (this.state.id === '_add') {
+            return <div className="form-group">
+                <DatePicker dateFormat="yyyy-MM-dd"
+                    selected={this.state.birth} onChange={this.changeBirthHandler} />
+            </div>
+        } else {
+            return <input required={true} placeholder="birth" name="birth" className="form-control"
+                value={this.state.birth} onChange={this.changeBirthHandler} />
+        }
+    }
+
     render() {
         return (
             <div >
-                <div style={{ marginTop: "10px" }} className="container">
+                <br></br>
+                <div className="container">
                     <div className="row">
                         <div className="card col-md-6 offset-md-3 offset-md-3">
                             {
@@ -126,10 +139,9 @@ class CreateOrUpdateApplicantComponent extends Component {
                                     </div>
                                     <div className="form-group">
                                         <label> Doğum Tarihi: </label>
-                                        <div className="form-group">
-                                            <DatePicker dateFormat="yyyy-MM-dd"
-                                                selected={this.state.birth} onChange={this.changeBirthHandler} />
-                                        </div>
+                                        {
+                                            this.getDate()
+                                        }
                                     </div>
                                     <div className="form-group">
                                         <label> Durum: </label>
